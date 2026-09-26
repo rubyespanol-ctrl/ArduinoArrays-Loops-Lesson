@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How Data Flows Through a Loop — Arrays with Loops</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Lesson · Part 2</span>
+  <h1>How Data Works in Array &amp; For Loop</h1>
+  <p>Every for loop follows the same three-part pattern:</p>
+
+  <div class="code"><span class="kw">for</span> (initialization; condition; increment) {
+  <span class="cm">// code that repeats</span>
+}</div>
+
+  <div class="card">
+    <p><span class="chip">initialization</span> — runs once, before the loop starts (usually sets the counter to 0)</p>
+    <p><span class="chip">condition</span> — checked before every repeat; the loop keeps going while this is true</p>
+    <p><span class="chip">increment</span> — runs after each repeat, usually increasing the counter by 1</p>
+  </div>
+
+  <h2>Applied to an array</h2>
+  <div class="code"><span class="kw">int</span> marks[<span class="num">4</span>] = {<span class="num">70</span>, <span class="num">85</span>, <span class="num">90</span>, <span class="num">65</span>};
+
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; <span class="num">4</span>; i++) {
+  Serial.<span class="fn">println</span>(marks[i]);
+}</div>
+  <p>Here, <span class="chip">i</span> starts at 0 and stops as soon as it reaches 4 — which conveniently matches this array's valid indexes: 0, 1, 2, 3.</p>
+
+  <h2>Tracing it step by step</h2>
+  <p>Here's exactly what happens each time the loop repeats:</p>
+
+  <table class="trace">
+    <tr><th>Step</th><th>i</th><th>Is i &lt; 4?</th><th>marks[i] printed</th></tr>
+    <tr><td>1</td><td class="mono">0</td><td>true</td><td class="mono">70</td></tr>
+    <tr><td>2</td><td class="mono">1</td><td>true</td><td class="mono">85</td></tr>
+    <tr><td>3</td><td class="mono">2</td><td>true</td><td class="mono">90</td></tr>
+    <tr><td>4</td><td class="mono">3</td><td>true</td><td class="mono">65</td></tr>
+    <tr class="stop"><td>5</td><td class="mono">4</td><td>false</td><td>loop stops — nothing printed</td></tr>
+  </table>
+
+  <div class="card">
+    <p style="margin:0;"><b>Key idea:</b> The loop condition is checked <i>before</i> each repeat. When <span class="chip">i</span> becomes 4, the condition <span class="chip">i &lt; 4</span> is false, so the loop stops — it never tries to access <span class="chip">marks[4]</span>, which doesn't exist.</p>
+  </div>
+</div>
+<nav class="pagenav">
+  <a class="home" href="index.html">🏠 Arrays + Loops</a>
+  <span class="progress">Page 3 of 6</span>
+  <div class="links">
+    <a class="navbtn" href="definition.html">← Previous</a>
+    <a class="navbtn primary" href="activity-array-loop.html">Next →</a>
+  </div>
+</nav>
+</body>
+</html>

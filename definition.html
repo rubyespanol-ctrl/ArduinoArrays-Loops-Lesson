@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Array & For Loops — Arrays with Loops</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Lesson · Part 1</span>
+  <h1>Array &amp; For Loops</h1>
+  <p>In the last lesson, you accessed array elements one at a time, by typing each index yourself:</p>
+
+  <div class="code"><span class="kw">int</span> marks[<span class="num">4</span>] = {<span class="num">70</span>, <span class="num">85</span>, <span class="num">90</span>, <span class="num">65</span>};
+Serial.<span class="fn">println</span>(marks[<span class="num">0</span>]);
+Serial.<span class="fn">println</span>(marks[<span class="num">1</span>]);
+Serial.<span class="fn">println</span>(marks[<span class="num">2</span>]);
+Serial.<span class="fn">println</span>(marks[<span class="num">3</span>]);</div>
+
+  <p>That works, but imagine an array with 100 values — typing 100 print lines isn't practical. A <b>for loop</b> lets you repeat an action automatically, changing the index each time, without writing it out by hand.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0;">The same code, with a for loop</h2>
+    <div class="code"><span class="kw">int</span> marks[<span class="num">4</span>] = {<span class="num">70</span>, <span class="num">85</span>, <span class="num">90</span>, <span class="num">65</span>};
+
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; <span class="num">4</span>; i++) {
+  Serial.<span class="fn">println</span>(marks[i]);
+}</div>
+    <p style="margin:0;">These two pieces of code do the <b>exact same thing</b> — the loop just writes it more efficiently, and works no matter how big the array is.</p>
+  </div>
+
+  <h2>Why arrays and loops belong together</h2>
+  <p>Arrays store many related values. For loops repeat an action many times. Put them together, and you can visit <b>every element</b> of an array — read it, print it, or change it — using just a few lines of code, whether the array holds 5 values or 5,000.</p>
+
+  <div class="card">
+    <p style="margin:0;"><b>Key idea:</b> The loop's counter variable (often named <span class="chip">i</span>) takes on each index value in turn — 0, then 1, then 2, and so on — which is exactly what you need to visit every slot in an array.</p>
+  </div>
+</div>
+<nav class="pagenav">
+  <a class="home" href="index.html">🏠 Arrays + Loops</a>
+  <span class="progress">Page 2 of 6</span>
+  <div class="links">
+    <a class="navbtn" href="index.html">← Previous</a>
+    <a class="navbtn primary" href="syntax.html">Next →</a>
+  </div>
+</nav>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Understanding Array & For Loop — Arrays with Loops</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Lesson · Interactive Activity</span>
+  <h1>Understanding Array &amp; For Loop</h1>
+  <p class="sub">5 questions on tracing, predicting, and debugging loops that work with arrays. Pick an answer for instant feedback.</p>
+  <div id="quiz"></div>
+</div>
+<nav class="pagenav">
+  <a class="home" href="index.html">🏠 Arrays + Loops</a>
+  <span class="progress">Page 4 of 6</span>
+  <div class="links">
+    <a class="navbtn" href="syntax.html">← Previous</a>
+    <a class="navbtn primary" href="encapsulation-definition.html">Next →</a>
+  </div>
+</nav>
+
+<script>
+(function(){
+  var questions = [
+    { tag:"Predict the Output",
+      code:'<span class="kw">int</span> nums[<span class="num">4</span>] = {<span class="num">2</span>, <span class="num">4</span>, <span class="num">6</span>, <span class="num">8</span>};\n<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; <span class="num">4</span>; i++) {\n  Serial.<span class="fn">println</span>(nums[i]);\n}',
+      q:"What does this print, in order?",
+      options:["2, 4, 6, 8 (each on its own line)","8, 6, 4, 2","2, 4, 6, 8, 10","Only 8, the last value"], correct:0,
+      good:"Correct! The loop starts at i=0 and prints each element in order until i reaches 4.",
+      bad:"Not quite. i starts at 0 and increases by 1 each time, printing nums[0] through nums[3] in order: 2, 4, 6, 8." },
+
+    { tag:"Analyze the Loop",
+      code:'<span class="kw">int</span> data[<span class="num">6</span>] = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>};\n<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; <span class="num">6</span>; i++) {\n  Serial.<span class="fn">println</span>(data[i]);\n}',
+      q:"How many times does the loop body run?",
+      options:["5","6","7","It runs forever"], correct:1,
+      good:"Correct! i takes the values 0 through 5 — that's 6 repeats, matching the array's 6 elements.",
+      bad:"Not quite. i runs from 0 up to (but not including) 6 — that's 0,1,2,3,4,5, which is 6 repeats." },
+
+    { tag:"Find the Bug",
+      code:'<span class="kw">int</span> vals[<span class="num">5</span>] = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>};\n<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">1</span>; i &lt; <span class="num">5</span>; i++) {\n  Serial.<span class="fn">println</span>(vals[i]);\n}',
+      q:"Which value never gets printed?",
+      options:["10","20","30","50"], correct:0,
+      good:"Correct! The loop starts at i=1 instead of i=0, so vals[0] (which is 10) gets skipped entirely.",
+      bad:"Not quite. Since i starts at 1, not 0, the loop skips index 0 — the value 10 is never printed." },
+
+    { tag:"Predict the Output",
+      code:'<span class="kw">int</span> scores[<span class="num">4</span>] = {<span class="num">5</span>, <span class="num">10</span>, <span class="num">15</span>, <span class="num">20</span>};\n<span class="kw">int</span> total = <span class="num">0</span>;\n<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; <span class="num">4</span>; i++) {\n  total = total + scores[i];\n}\nSerial.<span class="fn">println</span>(total);',
+      q:"What number is printed?",
+      options:["20","35","50","4"], correct:2,
+      good:"Correct! The loop adds every element to total: 5 + 10 + 15 + 20 = 50.",
+      bad:"Not quite. The loop adds all four values together: 5 + 10 + 15 + 20 = 50." },
+
+    { tag:"Analyze the Code",
+      code:'<span class="kw">int</span> readings[<span class="num">7</span>] = {<span class="num">3</span>,<span class="num">6</span>,<span class="num">9</span>,<span class="num">12</span>,<span class="num">15</span>,<span class="num">18</span>,<span class="num">21</span>};',
+      q:"Which for-loop condition correctly prints every element of this 7-value array without going out of bounds?",
+      options:["for (int i = 0; i <= 7; i++)","for (int i = 0; i < 7; i++)","for (int i = 1; i < 7; i++)","for (int i = 0; i < 8; i++)"], correct:1,
+      good:"Correct! Valid indexes are 0–6. i < 7 stops right after printing index 6 — the last valid element.",
+      bad:"Not quite. This array's valid indexes are 0–6. i < 7 is exactly right — the other options either skip index 0 or go out of bounds." }
+  ];
+
+  var quizEl = document.getElementById('quiz');
+  var score = 0;
+
+  questions.forEach(function(item, qi){
+    var card = document.createElement('div');
+    card.className = 'qcard';
+    var head = document.createElement('div');
+    head.className = 'qhead';
+    head.innerHTML = '<span class="qnum">' + (qi+1) + '</span><span class="tag">' + item.tag + '</span>';
+    card.appendChild(head);
+
+    var codeDiv = document.createElement('div');
+    codeDiv.className = 'code';
+    codeDiv.innerHTML = item.code;
+    card.appendChild(codeDiv);
+
+    var qtext = document.createElement('div');
+    qtext.className = 'qtext';
+    qtext.textContent = item.q;
+    card.appendChild(qtext);
+
+    var opts = document.createElement('div');
+    opts.className = 'opts';
+    var feedback = document.createElement('div');
+    feedback.className = 'feedback';
+
+    item.options.forEach(function(optText, oi){
+      var btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.type = 'button';
+      btn.textContent = optText;
+      btn.addEventListener('click', function(){
+        var allBtns = opts.querySelectorAll('.opt');
+        allBtns.forEach(function(b){ b.disabled = true; });
+        if(oi === item.correct){
+          btn.classList.add('correct');
+          feedback.className = 'feedback show good';
+          feedback.textContent = item.good;
+          score++;
+        } else {
+          btn.classList.add('incorrect');
+          allBtns[item.correct].classList.add('correct');
+          feedback.className = 'feedback show bad';
+          feedback.textContent = item.bad;
+        }
+      });
+      opts.appendChild(btn);
+    });
+
+    card.appendChild(opts);
+    card.appendChild(feedback);
+    quizEl.appendChild(card);
+  });
+})();
+</script>
+</body>
+</html>

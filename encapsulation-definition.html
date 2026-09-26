@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Encapsulating an Array + Loop in a Class — Arrays with Loops</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Lesson · Part 3</span>
+  <h1>Encapsulating an Array + Loop Inside a Class</h1>
+  <p>So far, your array and your loop have lived loosely inside <span class="chip">setup()</span>. In Object-Oriented Programming (OOP), you can bundle them together inside a <b>class</b> — a blueprint that packages related data and the actions that work on it into one reusable unit.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0;">Two key words: class & object</h2>
+    <p><b>class</b> — the blueprint. It defines what data and functions belong together.</p>
+    <p><b>object</b> — an actual "thing" built from that blueprint, ready to use in your program.</p>
+  </div>
+
+  <h2>Private vs. public</h2>
+  <p>Inside a class, you'll usually see two sections:</p>
+  <div class="card">
+    <p><span class="chip">private:</span> — data only the class itself can use directly. This is where the array usually lives, hidden from the rest of the program.</p>
+    <p><span class="chip">public:</span> — functions other code is allowed to call. This is how the outside world interacts with the class, without needing to know how it works internally.</p>
+  </div>
+
+  <h2>Putting it together</h2>
+  <div class="code"><span class="kw">class</span> TemperatureLog {
+  <span class="kw">private</span>:
+    <span class="kw">int</span> readings[<span class="num">5</span>] = {<span class="num">28</span>, <span class="num">29</span>, <span class="num">30</span>, <span class="num">31</span>, <span class="num">29</span>};
+    <span class="kw">int</span> size = <span class="num">5</span>;
+
+  <span class="kw">public</span>:
+    <span class="kw">void</span> <span class="fn">printReadings</span>() {
+      <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; size; i++) {
+        Serial.<span class="fn">println</span>(readings[i]);
+      }
+    }
+};
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);
+
+  TemperatureLog log;
+  log.<span class="fn">printReadings</span>();
+}</div>
+
+  <div class="card">
+    <p style="margin:0;"><b>Key idea:</b> The array <span class="chip">readings</span> and the loop that processes it are now sealed inside <span class="chip">TemperatureLog</span>. Outside code just creates an object (<span class="chip">TemperatureLog log;</span>) and calls its public function (<span class="chip">log.printReadings();</span>) — it never needs to touch the array directly. That's <b>encapsulation</b>: hiding the details, exposing only what's needed.</p>
+  </div>
+</div>
+<nav class="pagenav">
+  <a class="home" href="index.html">🏠 Arrays + Loops</a>
+  <span class="progress">Page 5 of 6</span>
+  <div class="links">
+    <a class="navbtn" href="activity-array-loop.html">← Previous</a>
+    <a class="navbtn primary" href="activity-encapsulation.html">Next →</a>
+  </div>
+</nav>
+</body>
+</html>
