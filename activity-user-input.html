@@ -3,48 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Encapsulating Array + Loop — Activity</title>
+<title>Storing User Input — Activity</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="wrap">
   <span class="eyebrow">Lesson · Interactive Activity</span>
-  <h1>Encapsulating an Array + Loop Inside a Class</h1>
-  <p class="sub">Complete the <b>ScoreBoard</b> class below. Type the missing keyword, symbol, or word into each yellow box, then check your answers.</p>
+  <h1>Storing User Input in an Array</h1>
+  <p class="sub">Complete the code below so it reads 5 numbers from the user and stores each one in the array. Type your answer into each yellow box.</p>
 
   <div class="card">
-    <div class="code" id="codeBlock">
-<span class="kw">class</span> ScoreBoard {
-  <input class="blank" id="b1" data-answer="private" style="width:64px;">:
-    <span class="kw">int</span> scores[<input class="blank" id="b2" data-answer="5">] = {<span class="num">75</span>, <span class="num">88</span>, <span class="num">92</span>, <span class="num">60</span>, <span class="num">81</span>};
-    <span class="kw">int</span> size = <input class="blank" id="b3" data-answer="5">;
-
-  <input class="blank" id="b4" data-answer="public" style="width:60px;">:
-    <span class="kw">void</span> <span class="fn">showScores</span>() {
-      <span class="kw">for</span> (<span class="kw">int</span> i = <input class="blank" id="b5" data-answer="0">; i <input class="blank" id="b6" data-answer="&lt;" style="width:22px;"> size; i++) {
-        Serial.<span class="fn">println</span>(scores[<input class="blank" id="b7" data-answer="i" style="width:20px;">]);
-      }
-    }
-
-    <span class="kw">void</span> <span class="fn">addToAll</span>(<span class="kw">int</span> amount) {
-      <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; size; i++) {
-        scores[i] = scores[i] + <input class="blank" id="b8" data-answer="amount" style="width:74px;">;
-      }
-    }
-};
+    <div class="code">
+<span class="kw">int</span> readings[<input class="blank" id="b1" data-answer="5">]; <span class="cm">// empty array for 5 values</span>
+<span class="kw">int</span> size = <span class="num">5</span>;
 
 <span class="kw">void</span> <span class="fn">setup</span>() {
   Serial.<span class="fn">begin</span>(<span class="num">9600</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"Enter 5 numbers:"</span>);
 
-  <input class="blank" id="b9" data-answer="ScoreBoard" style="width:92px;"> board;
-  board.<input class="blank" id="b10" data-answer="showScores" style="width:92px;">();
+  <span class="kw">for</span> (<span class="kw">int</span> i = <input class="blank" id="b2" data-answer="0">; i <input class="blank" id="b3" data-answer="&lt;" style="width:22px;"> size; i++) {
+    <span class="kw">while</span> (Serial.<span class="fn">available</span>() == <span class="num">0</span>) {
+      <span class="cm">// wait for input</span>
+    }
+    readings[<input class="blank" id="b4" data-answer="i" style="width:20px;">] = Serial.<span class="fn">parseInt</span>();
+    Serial.<span class="fn">print</span>(<span class="str">"Stored: "</span>);
+    Serial.<span class="fn">println</span>(readings[<input class="blank" id="b5" data-answer="i" style="width:20px;">]);
+  }
 
-  board.<input class="blank" id="b11" data-answer="addToAll" style="width:80px;">(<span class="num">5</span>);
-  board.showScores();
-}
-
-<span class="kw">void</span> <span class="fn">loop</span>() {
-  <span class="cm">// Nothing here for now</span>
+  Serial.<span class="fn">println</span>(<span class="str">"All values stored!"</span>);
 }</div>
   </div>
 
@@ -56,10 +42,10 @@
 </div>
 <nav class="pagenav">
   <a class="home" href="index.html">🏠 Arrays + Loops</a>
-  <span class="progress">Page 8 of 8</span>
+  <span class="progress">Page 6 of 8</span>
   <div class="links">
-    <a class="navbtn" href="encapsulation-definition.html">← Previous</a>
-    <a class="navbtn primary" href="index.html">🏁 Restart Lesson</a>
+    <a class="navbtn" href="user-input-definition.html">← Previous</a>
+    <a class="navbtn primary" href="encapsulation-definition.html">Next →</a>
   </div>
 </nav>
 
@@ -67,9 +53,7 @@
 (function(){
   var blanks = Array.prototype.slice.call(document.querySelectorAll('input.blank'));
   var result = document.getElementById('result');
-
   function norm(s){ return s.trim().toLowerCase(); }
-
   function checkOne(inp){
     var val = inp.value;
     var ans = inp.getAttribute('data-answer');
@@ -78,12 +62,10 @@
     if(norm(val) === norm(ans)){ inp.classList.add('correct'); return true; }
     inp.classList.add('incorrect'); return false;
   }
-
   blanks.forEach(function(inp){
     inp.addEventListener('blur', function(){ checkOne(inp); });
     inp.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ inp.blur(); } });
   });
-
   document.getElementById('checkBtn').addEventListener('click', function(){
     var correctCount = 0, filled = 0;
     blanks.forEach(function(inp){
@@ -93,12 +75,11 @@
     });
     result.className = 'result show ' + (correctCount === blanks.length ? 'good' : 'mixed');
     if(correctCount === blanks.length){
-      result.textContent = 'All ' + blanks.length + ' correct! You\'ve encapsulated an array and a loop inside a class. 🎉';
+      result.textContent = 'All ' + blanks.length + ' correct! You can now read live input into an array. 🎉';
     } else {
       result.textContent = 'Score: ' + correctCount + ' / ' + blanks.length + ' correct (' + filled + ' answered). Green boxes are right — fix the red ones and check again.';
     }
   });
-
   document.getElementById('resetBtn').addEventListener('click', function(){
     blanks.forEach(function(inp){ inp.value=''; inp.classList.remove('correct','incorrect'); });
     result.classList.remove('show');

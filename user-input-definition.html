@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Take Inputs from User — Arrays with Loops</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">Lesson · Part 3</span>
+  <h1>Take Inputs from User and Store Them in an Array</h1>
+  <p>So far, every array you've built already had its values typed in ahead of time. But often you don't know the values yet — you want the <b>user</b> to enter them while the program is running, using the Serial Monitor.</p>
+
+  <h2>Step 1: Declare an empty array</h2>
+  <p>You can declare an array with just a size, and no starting values. Arduino reserves the space; you fill it in later.</p>
+  <div class="code"><span class="kw">int</span> readings[<span class="num">5</span>]; <span class="cm">// empty array, ready to hold 5 values</span>
+<span class="kw">int</span> size = <span class="num">5</span>;</div>
+
+  <h2>Step 2: Read input and store it, one at a time</h2>
+  <div class="code"><span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="num">9600</span>);
+  Serial.<span class="fn">println</span>(<span class="str">"Enter 5 numbers, one at a time:"</span>);
+
+  <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; size; i++) {
+    <span class="kw">while</span> (Serial.<span class="fn">available</span>() == <span class="num">0</span>) {
+      <span class="cm">// wait here until the user sends a number</span>
+    }
+    readings[i] = Serial.<span class="fn">parseInt</span>();
+    Serial.<span class="fn">print</span>(<span class="str">"Stored: "</span>);
+    Serial.<span class="fn">println</span>(readings[i]);
+  }
+
+  Serial.<span class="fn">println</span>(<span class="str">"All values stored!"</span>);
+}</div>
+
+  <div class="card">
+    <h2 style="margin-top:0;">What's new here</h2>
+    <p><span class="chip">Serial.available()</span> — checks whether the user has typed and sent something yet. The small <span class="chip">while</span> loop just pauses until input arrives.</p>
+    <p><span class="chip">Serial.parseInt()</span> — reads whatever number the user typed and converts it into an <span class="chip">int</span> your program can use.</p>
+    <p><span class="chip">readings[i] = Serial.parseInt();</span> — stores that value into the next empty slot in the array.</p>
+  </div>
+
+  <div class="card">
+    <p style="margin:0;"><b>Key idea:</b> The <span class="chip">for</span> loop still does the same job as before — visiting each index from 0 to size−1 — except now, instead of copying values from <span class="chip">{ }</span>, it's filling the array with whatever the user types in, one entry per loop repeat.</p>
+  </div>
+</div>
+<nav class="pagenav">
+  <a class="home" href="index.html">🏠 Arrays + Loops</a>
+  <span class="progress">Page 5 of 8</span>
+  <div class="links">
+    <a class="navbtn" href="activity-array-loop.html">← Previous</a>
+    <a class="navbtn primary" href="activity-user-input.html">Next →</a>
+  </div>
+</nav>
+</body>
+</html>
